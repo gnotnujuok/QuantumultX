@@ -103,7 +103,7 @@ function historySummary(single) {
             let price = parseFloat(result[2]);
             if (index == 0) {
                 currentPrice = price
-                lowest60 = { Name: "060天最低价", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
+                lowest60 = { Name: "60天最低价", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
                 lowest180 = { Name: "180天最低价", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
                 lowest360 = { Name: "360天最低价", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
             }
