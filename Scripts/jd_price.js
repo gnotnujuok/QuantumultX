@@ -1,7 +1,3 @@
-/*
-README：https://github.com/yichahucha/surge/tree/master
- */
-
 const path1 = "serverConfig";
 const path2 = "wareBusiness";
 const path3 = "basicConfig";
@@ -53,7 +49,7 @@ if (url.indexOf(path2) != -1) {
             if (data.ok == 1 && data.single) {
                 const lower = lowerMsgs(data.single)
                 const detail = priceSummary(data)
-                const tip = data.PriceRemark.Tip + "（仅供参考）"
+                const tip = data.PriceRemark.Tip
                 lowerword.data.ad.adword = `${lower} ${tip}\n${detail}`;
                 floors.insert(bestIndex, lowerword);
             }
@@ -71,7 +67,7 @@ if (url.indexOf(path2) != -1) {
 function lowerMsgs(data) {
     const lower = data.lowerPriceyh
     const lowerDate = dateFormat(data.lowerDateyh)
-    const lowerMsg = "〽️历史最低到手价：¥" + String(lower) + ` (${lowerDate}) `
+    const lowerMsg = "历史最低到手价：¥" + String(lower) + ` (${lowerDate}) `
     return lowerMsg
 }
 
@@ -82,11 +78,11 @@ function priceSummary(data) {
     let list = listPriceDetail.concat(historySummary(data.single))
     list.forEach((item, index) => {
         if (item.Name == "双11价格") {
-            item.Name = "双十一价格"
+            item.Name = "11.11价格"
         } else if (item.Name == "618价格") {
-            item.Name = "六一八价格"
+            item.Name = "06.18价格"
         } else if (item.Name == "30天最低价") {
-            item.Name = "三十天最低"
+            item.Name = "30天最低价"
         }
         summary += `\n${item.Name}${getSpace(8)}${item.Price}${getSpace(8)}${item.Date}${getSpace(8)}${item.Difference}`
     })
@@ -107,9 +103,9 @@ function historySummary(single) {
             let price = parseFloat(result[2]);
             if (index == 0) {
                 currentPrice = price
-                lowest60 = { Name: "六十天最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
-                lowest180 = { Name: "一百八最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
-                lowest360 = { Name: "三百六最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
+                lowest60 = { Name: "060天最低价", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
+                lowest180 = { Name: "180天最低价", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
+                lowest360 = { Name: "360天最低价", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
             }
             if (index < 60 && price <= lowest60.price) {
                 lowest60.price = price
